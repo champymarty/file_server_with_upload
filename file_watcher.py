@@ -17,10 +17,15 @@ if MAX_FILE_NUMBER is None:
 else:
     MAX_FILE_NUMBER = int(MAX_FILE_NUMBER)
 
+if SLEEP_INTERVAL is None:
+    SLEEP_INTERVAL = 1
+else:
+    SLEEP_INTERVAL = int(SLEEP_INTERVAL)
+
 while True:
     files = sorted([ os.path.join(DATA_FOLDER, f) for f in os.listdir(DATA_FOLDER)], key=os.path.getctime)
     while len(files) > MAX_FILE_NUMBER:
         file = files.pop(0)
         os.remove(file)
-        print(f"removed {file}")
-    sleep(1)
+        print(f"removed {file}", flush=True)
+    sleep(SLEEP_INTERVAL)
